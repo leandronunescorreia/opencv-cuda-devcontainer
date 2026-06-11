@@ -77,3 +77,6 @@ Testing/
 # Third-party dependencies
 work/thirdparty/
 
+# Jupyter notebook checkpoints
+**/.ipynb_checkpoints/
+.ipynb_checkpoints/

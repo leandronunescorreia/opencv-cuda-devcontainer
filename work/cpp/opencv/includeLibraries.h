@@ -61,7 +61,3 @@
 #pragma cling load("/usr/local/lib/libopencv_xfeatures2d.so.4.10.0")
 #pragma cling load("/usr/local/lib/libopencv_ml.so.4.10.0")
 #pragma cling load("/usr/local/lib/libopencv_calib3d.so.4.10.0")
-
-
-std::string DATA_PATH = "../../../resource/lib/publicdata/";
-std::string MODEL_PATH = "../../../resource/lib/publicdata/models/";

@@ -310,6 +310,8 @@ RUN wget https://download.pytorch.org/libtorch/cu118/libtorch-cxx11-abi-shared-w
 # warning to abi compatibility issues with libtorch and opencv, see 
 # conda install -c conda-forge openh264
 
+# RUN conda install -y -c conda-forge onnx
+
 EXPOSE 8888
 
 RUN mkdir -p /work
