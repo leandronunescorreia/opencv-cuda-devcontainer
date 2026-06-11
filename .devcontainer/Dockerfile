@@ -296,6 +296,20 @@ pytorch-cuda=11.8 && \
 conda clean --all --yes
 RUN conda clean --all --yes
 
+
+# ------------------------------------------------------------
+# setup libtorch for C++ development
+# ------------------------------------------------------------
+RUN wget https://download.pytorch.org/libtorch/cu118/libtorch-cxx11-abi-shared-with-deps-2.5.0%2Bcu118.zip \
+ && unzip libtorch*.zip \
+ && mkdir -p /work/work/thirdparty \
+ && mv libtorch /work/work/thirdparty/libtorch \
+ && rm libtorch*.zip
+
+
+# warning to abi compatibility issues with libtorch and opencv, see 
+# conda install -c conda-forge openh264
+
 EXPOSE 8888
 
 RUN mkdir -p /work

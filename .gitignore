@@ -73,3 +73,7 @@ Testing/
 *.elf
 *.hex
 *.o.bak
+
+# Third-party dependencies
+work/thirdparty/
+
