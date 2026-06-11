@@ -286,6 +286,16 @@ RUN mkdir -p build && cd build && \
 RUN apt-get -qq -y autoremove && \
     apt-get -qq autoclean
 
+RUN conda install -y \
+-c pytorch \
+-c nvidia \
+pytorch=2.5.0 \
+torchvision=0.20.0 \
+torchaudio=2.5.0 \
+pytorch-cuda=11.8 && \
+conda clean --all --yes
+RUN conda clean --all --yes
+
 EXPOSE 8888
 
 RUN mkdir -p /work
