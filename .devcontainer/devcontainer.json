@@ -1,0 +1,76 @@
+{
+  // UNCOMMENT THIS BLOCK TO BUILD THE IMAGE FROM THE DOCKERFILE INSTEAD OF USING A PRE-BUILT IMAGE
+  "name": "${localWorkspaceFolderBasename}",
+  "build": {
+    "context": "..", // shared context
+    "dockerfile": "Dockerfile",
+    "args": {}
+  },
+    "containerEnv": {
+        "APP_ENV": "DEV"
+    },
+
+    // runArgs is used to pass additional arguments to the Docker run command
+    "runArgs": [
+        "--cap-add=SYS_ADMIN",          // Add SYS_ADMIN capability
+        "--privileged",                 // Run container in privileged mode
+        "--net=host",
+        "--gpus=all", 
+        "--shm-size=1gb"
+    ],
+
+    // postCreateCommand is used to run commands after the container is created
+    // "postCreateCommand": "apt update",
+
+    // customizations for VS Code
+  "customizations": {
+    "vscode": {
+      "settings": {
+        // "python.defaultInterpreterPath": "/usr/bin/python3.10",
+        "notebook.formatOnSave.enabled": true,
+        "notebook.codeActionsOnSave": {
+          "notebook.source.fixAll": "explicit",
+          "notebook.source.organizeImports": "explicit"
+        },
+        "[python]": {
+          "editor.formatOnSave": true,
+          "editor.codeActionsOnSave": {
+            "source.fixAll": "explicit",
+            "source.organizeImports": "explicit"
+          }
+        },
+        "python.testing.pytestArgs": ["src"],
+        "python.testing.unittestEnabled": false,
+        "python.testing.pytestEnabled": true,
+        "files.exclude": {
+            ".coverage": true,
+            ".pytest_cache": true,
+            "__pycache__": true
+        }
+      },
+      "extensions": [
+        "ms-python.python",
+        "ms-toolsai.jupyter",
+        "ms-python.vscode-pylance",
+        "ms-python.black-formatter",
+        "ms-toolsai.jupyter-keymap",
+        "ms-toolsai.jupyter-renderers",
+        "ms-vscode.cpptools-extension-pack",
+        "ms-vscode.cmake-tools"
+      ]
+    }
+  },
+
+    // workspace
+    "workspaceMount": "source=${localWorkspaceFolder},target=/work,type=bind,consistency=delegated",
+    "workspaceFolder": "/work",
+
+    // mounts using env vars instead of hardcoded paths
+    // "mounts": [
+    //     "source=C:\\videos,target=/mnt/videos,type=bind,consistency=delegated",
+    //     "source=C:\\dev\\models,target=/mnt/models,type=bind,consistency=delegated",
+    //     "source=C:\\dev\\datasets,target=/mnt/datasets,type=bind,consistency=delegated"
+    // ],
+
+    // "remoteUser": "vscode"
+}
