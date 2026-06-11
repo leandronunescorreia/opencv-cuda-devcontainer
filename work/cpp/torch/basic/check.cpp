@@ -4,11 +4,23 @@
 #include <iostream>
 
 int main() {
-    std::cout << "is cuda available: " << torch::cuda::is_available() << "\n";
-    std::cout << "device count: " << torch::cuda::device_count() << "\n";
+  std::cout << "is cuda available: " << torch::cuda::is_available() << "\n";
+  std::cout << "device count: " << torch::cuda::device_count() << "\n";
 
   torch::Tensor tensor = torch::randn({3,3});
-  std::cout << "The random matrix is:" << std::endl << tensor << std::endl;
+  std::cout << "The random matrix is:" << tensor << std::endl;
+
+  torch::Tensor ta = torch::tensor(2.3, torch::requires_grad());
+  std::cout << "The tensor with gradient is:" << ta << std::endl;
+  torch::Tensor tb = torch::tensor(5.0, torch::requires_grad());
+  std::cout << "The tensor with gradient is:" << tb << std::endl;
+
+  auto y = ta * tb;
+  std::cout << "The result of multiplication is:" << y << std::endl;
+  y.backward();
+  std::cout << "The gradient of ta is:" << ta.grad() << std::endl;
+  std::cout << "The gradient of tb is:" << tb.grad() << std::endl;
+
 
   //Initialize the device to CPU
   torch::DeviceType device = torch::kCPU;
